@@ -33,7 +33,10 @@ def main():
 
     n = int(input('Введите количество строк в системе(через пробел): '))
     x, modd = zip(*(map(int, input('Введите x и mod (через пробел): ').split()) for _ in range(n)))
-    N = reduce(lambda x, y: x * y, modd, 1)
+    N = reduce(lambda x, y : x * y, modd, 1)
+    print("\n")
+    print(f"Считаем N (произведение всех модулей) = {N}\n" + "\n".join(
+        f"Считаем N_{i} = {N} / {modd[i]} = {N // modd[i]}" for i in range(n)))
 
     a = 0
     equation_str = ""
@@ -47,12 +50,13 @@ def main():
         formatted_steps = [list(map(lambda x: "None" if x is None else str(x), step)) for step in steps]
 
         print(tabulate(formatted_steps, headers=table_headers, tablefmt="pretty"))
+        print("\n")
 
         equation_str += f"{x[i]}*{N // modd[i]}*{x_val} + "
         a += x[i] * N // modd[i] * x_val
 
     print(f'a  = {equation_str[:-3]} = {a} = {a % reduce(lambda x, y: x * y, modd)} mod(M = {" * ".join(map(str, modd))})')
-
+    print("*" * 60)
 
 if __name__ == "__main__":
     main()

@@ -86,5 +86,16 @@ def extended_gcd_for_1(m: int, a: int) -> tuple[list[tuple[int, ...]], int | int
     return steps, y2
 
 def main():
+    instruction_title = f"{'*' * 15} Инструкция для Задания 4: {'*' * 15}"
+    equation_example = "x^2 ≡ 805 (mod 857)"
+    input_prompt = "Ниже мы для этого примера должны ввести 2 числа: 805 857"
+    separator = "*" * 56
+
+    print(instruction_title.center(56))
+    print(equation_example.center(56))
+    print(input_prompt.center(56))
+    print(separator)
     a, p = map(int, input("Введите два числа через пробел: ").split())
     extract_sqrt_by_prime_mod(a, p)
+    print("*"*60)
+

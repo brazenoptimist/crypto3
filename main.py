@@ -5,9 +5,10 @@ from fourth_task import main as fourth_task_main
 
 def main():
     while True:
-        print("Выберите задание (1, 2, 3), или введите 'exit' для завершения:")
+        print("Выберите задание (1, 2, 3, 4), или введите 0 для завершения:")
         choice = input("Введите номер задания: ")
-        if choice == "exit":
+        print("\n")
+        if choice == "0":
             print("Программа завершена.")
             break
         elif choice == "1":

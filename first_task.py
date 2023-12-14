@@ -21,8 +21,8 @@ def extended_gcd_for_1(m: int, a: int) -> Tuple[List[Tuple[int, ...]], int | int
 
 def main():
     instruction_title = f"{'*' * 24} Инструкция для Задания 1: {'*' * 24}"
-    equation_example = "Вычислить 877^-1 (mod 2476)"
-    input_prompt = "Ниже мы для этого примера должны ввести 2 числа: 877 2476"
+    equation_example = "Вычислить 877^-1 (mod 2467)"
+    input_prompt = "Ниже мы для этого примера должны ввести 2 числа: 877 2467"
     separator = "*" * 75
 
     print(instruction_title.center(75))
@@ -33,10 +33,12 @@ def main():
     a, m = map(int, input("Введите два числа через пробел: ").split())
     result = extended_gcd_for_1(m, a)
 
+    print(f"Ответ a^-1 = {result[1]}")
     print("*" * 49)
     print("ПРОВЕРКА".center(49))
-    print(f"{a}* {result[1]} = {a * result[1]} = {a * result[1] % m} mod {m}".center(49))
+    print(f"{a} * {result[1]} = {a * result[1]} = {a * result[1] % m} mod {m}".center(49))
     print("*" * 49)
+
 
 
 if __name__ == "__main__":

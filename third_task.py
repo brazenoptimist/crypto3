@@ -58,7 +58,7 @@ def main()  -> object:
     print("Множество решений:")
     solutions = [x + i * new_m for i in range(devision)]
     print("\n".join(f"x ≡ {solution} (mod {m})" for solution in solutions))
-
+    print("*" * 60)
 
 if __name__ == "__main__" :
     main()
