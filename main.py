@@ -1,6 +1,7 @@
 from first_task import main as first_task_main
 from second_task import main as second_task_main
 from third_task import main as third_task_main
+from fourth_task import main as fourth_task_main
 
 def main():
     while True:
@@ -15,6 +16,8 @@ def main():
             second_task_main()
         elif choice == "3":
             third_task_main()
+        elif choice == "4":
+            fourth_task_main()
         else:
             print("Некорректный выбор задания.")
 
