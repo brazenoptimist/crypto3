@@ -31,7 +31,7 @@ def main():
     print(separator)
 
     a, m = map(int, input("Введите два числа через пробел: ").split())
-    result = extended_gcd_for_1(m, a)
+    result: (list, int) = extended_gcd_for_1(m, a)
 
     print(f"Ответ a^-1 = {result[1]}")
     print("*" * 49)
