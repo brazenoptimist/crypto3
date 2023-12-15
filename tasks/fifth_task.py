@@ -1,11 +1,10 @@
-
-
 # TODO сделать вычисление символа лежандра разными способами
 
-def solution():
+def solution() :
     pass
 
-def main():
+
+def main() :
     instruction_title = f"{'*' * 24} Инструкция для Задания 5: {'*' * 24}"
     equation_example = "Вычислить символ лежандра (170/311) c помощью критерия Эйлера"
     help1 = "Третьим числом надо выбрать какой критерий нужен:"
@@ -20,6 +19,6 @@ def main():
     print(input_prompt.center(61))
     print(separator)
 
-if __name__ == "__main__":
-    main()
 
+if __name__ == "__main__" :
+    main()
