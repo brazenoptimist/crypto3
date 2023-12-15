@@ -18,7 +18,6 @@ def extended_gcd_for_1(m: int, a: int) -> Tuple[List[Tuple[int, ...]], int | int
 
     return steps, y2
 
-
 def main():
     instruction_title = f"{'*' * 24} Инструкция для Задания 1: {'*' * 24}"
     equation_example = "Вычислить 877^-1 (mod 2467)"
