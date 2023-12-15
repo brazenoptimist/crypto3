@@ -1,4 +1,19 @@
 from tabulate import tabulate
+from typing import List, Tuple
+
+def extract_sqrt_by_complex_mod(a, q, p):
+    n = q * p
+    r1, r2 = extract_sqrt_by_prime_mod(a, p)
+    s1, s2 = extract_sqrt_by_prime_mod(a, q)
+
+    c, d = extended_gcd(p, q)
+
+    x = (r1*d*q + s1*c*p) % n
+    y = (r1*d*q - s1*c*p) % n
+
+    print(f"Ответ: {x} {-x} {y} {-y}")
+
+    return (x, -x, y, -y)
 
 def extract_sqrt_by_prime_mod(a, p):
     ls = legendre_symbol(a, p)
@@ -30,7 +45,7 @@ def extract_sqrt_by_prime_mod(a, p):
     print(f"s = {s}\n")
 
     print("Шаг 4.")
-    steps, y2 = extended_gcd_for_1(p, a)
+    _, y2 = extended_gcd(p, a)
     print(f"{a}^-1 mod {p} = {y2}\n")
 
     c0 = pow_by_mod(b, t, p)
@@ -52,6 +67,8 @@ def extract_sqrt_by_prime_mod(a, p):
 
     print(f"Ответ: r={r}, -r={-r}")
 
+    return (r, -r)
+
 
 def legendre_symbol(a, p):
     return pow_by_mod(a, (p - 1) // 2, p)
@@ -68,34 +85,48 @@ def pow_by_mod(num, pow, mod):
 
     return (num * a) % mod
 
-def extended_gcd_for_1(m: int, a: int) -> tuple[list[tuple[int, ...]], int | int] :
-    y2, y1 = 0, 1
-    steps: List[Tuple[int, ...]] = [(None, None, None, m, a, y2, y1)]
+def extended_gcd(a: int, b: int) -> List[Tuple[int, ...]]:
+    x2, x1, y2, y1 = 1, 0, 0, 1
+    steps: List[Tuple[int, ...]] = [(None, None, None, None, a, b, x2, x1, y2, y1)]
 
-    while a != 0 :
-        q, r = divmod(m, a)
-        y = y2 - q * y1
-        m, a, y2, y1 = a, r, y1, y
-        steps.append((q, r, y, m, a, y2, y1))
+    while b != 0:
+        q, r = divmod(a, b)
+        x, y = x2 - q * x1, y2 - q * y1
+        a, b, x2, x1, y2, y1 = b, r, x1, x, y1, y
+        steps.append((q, r, x, y, a, b, x2, x1, y2, y1))
 
-    table_headers = ["q", "r", "y", "m", "a", "y2", "y1"]
-    formatted_steps = [list(map(lambda x : "None" if x is None else str(x), step)) for step in steps]
-
-    print(tabulate(formatted_steps, headers=table_headers, tablefmt="pretty"))
-
-    return steps, y2
+    return x2, y2
 
 def main():
-    instruction_title = f"{'*' * 15} Инструкция для Задания 4: {'*' * 15}"
-    equation_example = "x^2 ≡ 805 (mod 857)"
-    input_prompt = "Ниже мы для этого примера должны ввести 2 числа: 805 857"
-    separator = "*" * 56
+    print("Выберите подтип задания (1 для простого делителя, 2 для составного):")
+    choice = input("Введите номер подтипа: ")
+    print("\n")
+    if choice == "1":
+        instruction_title = f"{'*' * 15} Инструкция для Задания 4: {'*' * 15}"
+        equation_example = "x^2 ≡ 805 (mod 857)"
+        input_prompt = "Ниже мы для этого примера должны ввести 2 числа: 805 857"
+        separator = "*" * 56
 
-    print(instruction_title.center(56))
-    print(equation_example.center(56))
-    print(input_prompt.center(56))
-    print(separator)
-    a, p = map(int, input("Введите два числа через пробел: ").split())
-    extract_sqrt_by_prime_mod(a, p)
-    print("*"*60)
+        print(instruction_title.center(56))
+        print(equation_example.center(56))
+        print(input_prompt.center(56))
+        print(separator)
+        a, p = map(int, input("Введите два числа через пробел: ").split())
+        extract_sqrt_by_prime_mod(a, p)
+        print("*"*60)
+
+    elif choice == "2":
+        instruction_title = f"{'*' * 15} Инструкция для Задания 4: {'*' * 15}"
+        equation_example = "x^2 ≡ 421 (mod 3503), если извечтно, что 3503 = 31 * 113"
+        input_prompt = "Ниже мы для этого примера должны ввести 3 числа: 421 31 113"
+        separator = "*" * 56
+
+        print(instruction_title.center(56))
+        print(equation_example.center(56))
+        print(input_prompt.center(56))
+        print(separator)
+        a, p, q = map(int, input("Введите три числа через пробел: ").split())
+        extract_sqrt_by_complex_mod(a, p, q)
+        print("*"*60)
+
 
